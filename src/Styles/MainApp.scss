@@ -1,0 +1,111 @@
+$link-color: #1de9b6; // Main Color
+$text-color: #263238; //Material Black
+$off-white: #e0e1e0;
+$button-highlight: #a6bacb;
+
+// animation: fadeInAnimation ease 3s;
+// animation-iteration-count: 1;
+// animation-fill-mode: forwards;
+// scroll-behavior: smooth;
+
+// @keyframes fadeInAnimation {
+//   0% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
+
+.button-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.arrow-link {
+  color: $off-white;
+  font-weight: bold;
+  font-family: "Roboto Mono", monospace;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 50px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 20px;
+  border: 2px solid $button-highlight;
+
+  @media only screen and (max-width: 600px) {
+    padding: 8px 18px;
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  &:after {
+    position: relative;
+    bottom: 0.2ex;
+    margin-left: 10px;
+
+    color: $link-color;
+    font-size: 1.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transition: all 0.15s ease-in-out;
+  }
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: transparentize($color: $link-color, $amount: 0.9);
+  }
+  &:hover:after {
+    transform: translateX(7px);
+  }
+  a {
+    &:hover {
+      color: $off-white;
+    }
+  }
+}
+
+span.animate-hand {
+  animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
+  animation-duration: 2.2s; /* Change to speed up or slow down */
+  animation-iteration-count: infinite; /* Never stop waving :) */
+  transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
+  display: inline-block;
+  font-size: 1.8rem;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 1.5rem;
+  }
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-10deg);
+  } /* The following four values can be played with to make the waving more or less extreme */
+  20% {
+    transform: rotate(12deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(9deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  } /* Reset for the last half to pause */
+  100% {
+    transform: rotate(0deg);
+  }
+}

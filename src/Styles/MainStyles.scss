@@ -1,0 +1,354 @@
+@charset "utf-8";
+// Some custom colors
+$link-color: hsl(165, 82%, 51%); // Main Color
+$text-color: #263238; //Material Black
+$black: #424242;
+$off-white: #e0e1e0;
+$button-highlight: #a6bacb;
+$main-color: #1de9b6;
+$secondary: #192824;
+$background: #192824;
+$green: #03dac6;
+$yellow: #ffd913;
+$orange: #ff9c55;
+$red: #ff5555;
+$vlight-green: #a4ffe6;
+$light-green: #00ffbf;
+$dark-green: #00b686;
+$red: #ff5555;
+$lg: #75f1d2;
+$llg: #46edc3;
+$g: #1de9b6;
+$dg: #00e3aa;
+$ddg: #00ad82;
+$p-height: 10px;
+$white: #fff;
+// Set your brand colors
+$red: #e65f61;
+$muted-red: #f26c67;
+$pink: #fa7c91;
+$brown: #a1887f;
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
+$blueish: #8bd0c3;
+$grey: #353f2d;
+$blue: #42a1ff;
+
+//Pomodoro Colors
+$blue-1: #8cd1c3;
+$purple: #bb86fc;
+$green: #9fbf87;
+// Update Bulma's global variables
+//@extend
+//@extend
+//Fonts
+$family-sans-serif: "Overpass", sans-serif;
+$family-secondary: "Playfair Display", sans-serif;
+$grey-dark: $text-color;
+$grey-light: $beige-lighter;
+$navbar-height: 2.5rem;
+$navbar-padding-vertical: 0.1rem;
+//Custom colors
+$primary: $purple;
+$light: $blue-1;
+$info: $green;
+$link: $link-color;
+$success: $orange;
+$warning: $yellow;
+$danger: $muted-red;
+//Other props
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+$footer-padding: 2rem 1.5rem 2rem 1.5rem;
+$navbar-dropdown-background-color: $red;
+$navbar-item-color: $beige-lighter;
+$navbar-dropdown-item-active-background-color: $red;
+$navbar-item-hover-background-color: transparent;
+// Update some of Bulma's component variables
+$body-background-color: $black;
+$control-border-width: 2px;
+$card-background-color: lighten(
+  $color: $beige-light,
+  $amount: 10%,
+);
+$footer-background-color: $background;
+$border-light: $background;
+$progress-bar-background-color: transparentize($background, 0.6);
+//Size override
+$table-cell-padding: 0.15em 0.25em;
+$size-1: 8rem;
+$size-2: 3.5rem;
+$size-3: 2.5rem;
+$size-4: 1.5rem;
+$size-5: 1.25rem;
+$size-6: 1rem;
+$size-7: 0.7rem;
+$dimensions: 16 24 32 48 64 96 128 256 512;
+
+// Import only what you need from Bulma
+@import "../../node_modules/bulma/bulma.sass";
+// @import "../node_modules/bulma/sass/utilities/_all.sass";
+// @import "../node_modules/bulma/sass/base/_all.sass";
+// @import "../node_modules/bulma/sass/elements/button.sass";
+// @import "../node_modules/bulma/sass/elements/container.sass";
+// @import "../node_modules/bulma/sass/elements/title.sass";
+// @import "../node_modules/bulma/sass/elements/content.sass";
+// // @import "../node_modules/bulma/sass/form/_all.sass";
+// @import "../node_modules/bulma/sass/components/navbar.sass";
+// @import "../node_modules/bulma/sass/layout/_all.sass";
+// @import "../node_modules/bulma/sass/grid/tiles.sass";
+// @import "../node_modules/bulma/sass/grid/columns.sass";
+
+//Ahhhhh We dont want this
+$card-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+.table td,
+.table th {
+  border: initial;
+}
+#content-main {
+  background-color: lighten($color: $beige-light, $amount: 8%);
+  padding: 5vmax;
+}
+.table {
+  background-color: initial;
+}
+.card-footer-item:not(:last-child) {
+  border-right: none;
+}
+//Custom functions
+$colorsPal: (
+  light: $light,
+  primary: $primary,
+  link: $link,
+  info: $info,
+  success: $success,
+  warning: $warning,
+  danger: $danger,
+  white: $white,
+  black: $black,
+);
+@each $colorname, $color-bg in $colorsPal {
+  .is-muted-#{$colorname} {
+    background-color: lighten($color: $color-bg, $amount: 10%);
+  }
+}
+@each $colorname, $color-bg in $colorsPal {
+  .is-highlight-#{$colorname} {
+    margin: 4px;
+    text-decoration: none;
+    color: #9ab1c4;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    text-decoration: none;
+    box-shadow: inset 0 -3px 0 darken($color-bg, 10%);
+    &:hover {
+      box-shadow: inset 0 -47px 0 0 lighten($color-bg, 15%);
+      color: white;
+      &::after {
+        color: inherit;
+        font-style: italic;
+        margin-left: -5px;
+        content: attr(title);
+      }
+    }
+  }
+}
+@each $colorname, $color-bg in $colorsPal {
+  .card-footer-#{$colorname} {
+    background-color: lighten($color: $color-bg, $amount: 10%);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+}
+@each $colorname, $color-bg in $colorsPal {
+  .bold-#{$colorname} {
+    font-weight: bold;
+    color: $color-bg;
+    &:hover {
+      color: lighten($color: $color-bg, $amount: 10%);
+    }
+  }
+}
+
+// Some custom SASS
+body,
+html {
+  line-height: 1.15;
+  user-select: none;
+  scroll-behavior: smooth;
+}
+
+.is-avatar {
+  vertical-align: middle;
+  height: 5vh;
+
+  width: 15vw;
+  @media screen and (max-width: 1023px) {
+    width: auto;
+    max-width: 70%;
+    margin: auto !important;
+    vertical-align: middle;
+    height: 5vh;
+  }
+}
+
+.is-avatar-hero {
+  vertical-align: middle;
+  filter: contrast(120%);
+  max-width: 25vmax;
+  max-height: 25vmax;
+  background-image: linear-gradient(
+    rgba(29, 233, 182, 0.6),
+    rgba(51, 51, 51, 0.7)
+  );
+  background-size: cover !important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.tag-footer {
+  justify-content: space-between;
+  overflow-x: auto;
+}
+::-webkit-scrollbar {
+  margin-top: 2px;
+  width: 5px !important;
+  height: 4px !important;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px transparentize($background, 0) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px transparentize($background, 0) !important;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  -webkit-box-shadow: inset 0 0 6px transparentize($background, 0.9) !important;
+}
+button {
+  a {
+    color: #eff0eb;
+  }
+}
+.tile {
+  justify-content: center;
+}
+
+.is-hcentered {
+  justify-content: space-around;
+}
+.is-family-mono {
+  font-family: "Roboto Mono", monospace;
+}
+.hr-match {
+  display: inline-block;
+  &:after {
+    content: "";
+    display: block;
+    border-top: 5px solid $link-color;
+    transform: skewX(-50deg);
+    margin-right: 10px;
+  }
+}
+
+.number-about {
+  font-size: 1.4rem;
+  color: $link-color;
+}
+.has-no-bg {
+  background: transparent;
+}
+.progress {
+  width: 55%;
+}
+#hero-content {
+  background-color: transparentize($color: #000, $amount: 0.2);
+  z-index: 0;
+  backdrop-filter: blur(5px) contrast(1.8);
+}
+.is-light-muted-bg {
+  background-color: transparentize($color: $beige-light, $amount: 0.6);
+  border-radius: 2px;
+}
+.is-muted-bg {
+  background-color: transparentize($color: $dg, $amount: 0.5);
+  border-radius: 2px;
+}
+.is-active {
+  background-color: transparentize($color: $link-color, $amount: 0.7);
+  border-radius: 20px;
+  a {
+    color: $white !important;
+  }
+}
+.is-inactive {
+  background-color: transparentize($color: $llg, $amount: 0.9);
+  border-radius: 20px;
+  a {
+    color: $white !important;
+  }
+}
+
+.level:not(:last-child) {
+  margin-bottom: 0.4rem;
+}
+.custom-width {
+  max-width: 26.5vw;
+}
+.slick-prev,
+.slick-next {
+  &::before {
+    color: #3c3c3b !important;
+  }
+}
+
+//MEDIA Queries
+
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    background-color: #f05c57;
+    box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
+    padding: 0.5rem 0;
+  }
+  #MainIcon {
+    height: 156px;
+    width: 156px;
+  }
+  body,
+  html {
+    overflow-x: hidden;
+  }
+  #contentMain {
+    padding: 2vmax;
+  }
+  .level-left + .level-right {
+    margin-top: 0.2rem;
+  }
+  .level:not(:last-child) {
+    margin-bottom: 0.8rem;
+  }
+  .custom-width {
+    max-width: 100%;
+  }
+  .hero.is-fullheight {
+    min-height: calc(100vh - #{$navbar-height});
+  }
+  canvas {
+    max-height: calc(100vh - #{$navbar-height});
+    min-width: calc(100vw - 0);
+  }
+  #content-main {
+    padding: 0.5vmax;
+  }
+  .progress {
+    max-width: 35%;
+  }
+}
