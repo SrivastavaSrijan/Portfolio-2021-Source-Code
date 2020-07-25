@@ -42,10 +42,14 @@ $green: #9fbf87;
 //@extend
 //@extend
 //Fonts
-$family-sans-serif: "Overpass", sans-serif;
-$family-secondary: "Playfair Display", sans-serif;
+$family-sans-serif: 'Overpass', sans-serif;
+$family-secondary: 'Open Sans', sans-serif;
+$family-primary: $family-sans-serif;
+
 $grey-dark: $text-color;
 $grey-light: $beige-lighter;
+$weight-normal: 300;
+$weight-light: 200;
 $navbar-height: 2.5rem;
 $navbar-padding-vertical: 0.1rem;
 //Custom colors
@@ -65,15 +69,17 @@ $navbar-item-color: $beige-lighter;
 $navbar-dropdown-item-active-background-color: $red;
 $navbar-item-hover-background-color: transparent;
 // Update some of Bulma's component variables
-$body-background-color: $black;
+$body-background-color: #000;
 $control-border-width: 2px;
 $card-background-color: lighten(
   $color: $beige-light,
-  $amount: 10%,
+  $amount: 100%,
 );
 $footer-background-color: $background;
 $border-light: $background;
 $progress-bar-background-color: transparentize($background, 0.6);
+$text: $text-color;
+$family-code: monospace;
 //Size override
 $table-cell-padding: 0.15em 0.25em;
 $size-1: 8rem;
@@ -82,22 +88,32 @@ $size-3: 2.5rem;
 $size-4: 1.5rem;
 $size-5: 1.25rem;
 $size-6: 1rem;
-$size-7: 0.7rem;
+$size-7: 0.8rem;
 $dimensions: 16 24 32 48 64 96 128 256 512;
 
 // Import only what you need from Bulma
-@import "../../node_modules/bulma/bulma.sass";
-// @import "../node_modules/bulma/sass/utilities/_all.sass";
-// @import "../node_modules/bulma/sass/base/_all.sass";
-// @import "../node_modules/bulma/sass/elements/button.sass";
-// @import "../node_modules/bulma/sass/elements/container.sass";
-// @import "../node_modules/bulma/sass/elements/title.sass";
-// @import "../node_modules/bulma/sass/elements/content.sass";
-// // @import "../node_modules/bulma/sass/form/_all.sass";
-// @import "../node_modules/bulma/sass/components/navbar.sass";
-// @import "../node_modules/bulma/sass/layout/_all.sass";
-// @import "../node_modules/bulma/sass/grid/tiles.sass";
-// @import "../node_modules/bulma/sass/grid/columns.sass";
+// @import "../../node_modules/bulma/bulma.sass";
+@import '~bulma/sass/utilities/_all.sass';
+@import '~bulma/sass/base/_all.sass';
+@import '~bulma/sass/elements/container.sass';
+@import '~bulma/sass/elements/title.sass';
+@import '~bulma/sass/elements/content.sass';
+@import '~bulma/sass/elements/image.sass';
+@import '~bulma/sass/elements/notification.sass';
+@import '~bulma/sass/elements/table.sass';
+@import '~bulma/sass/elements/tag.sass';
+@import '~bulma/sass/elements/progress.sass';
+
+@import '~bulma/sass/components/card.sass';
+@import '~bulma/sass/components/level.sass';
+@import '~bulma/sass/components/tabs.sass';
+@import '~bulma/sass/grid/columns.sass';
+@import '~bulma/sass/helpers/_all.sass';
+@import '~bulma/sass/layout/_all.sass';
+
+// @import "../../node_modules/bulma/sass/form/_all.sass";
+// @import "../../node_modules/bulma/sass/components/navbar.sass";
+// @import "../../node_modules/bulma/sass/grid/tiles.sass";
 
 //Ahhhhh We dont want this
 $card-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -107,13 +123,19 @@ $card-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 #content-main {
   background-color: lighten($color: $beige-light, $amount: 8%);
-  padding: 5vmax;
 }
 .table {
   background-color: initial;
 }
 .card-footer-item:not(:last-child) {
   border-right: none;
+}
+.content table td,
+.content table th {
+  border: none;
+}
+figure {
+  background-color: lighten($color: $beige-light, $amount: 10%);
 }
 //Custom functions
 $colorsPal: (
@@ -134,21 +156,24 @@ $colorsPal: (
 }
 @each $colorname, $color-bg in $colorsPal {
   .is-highlight-#{$colorname} {
-    margin: 4px;
     text-decoration: none;
-    color: #9ab1c4;
+    color: transparent;
     transition: all 0.2s ease-in-out;
     box-sizing: border-box;
     text-decoration: none;
     box-shadow: inset 0 -3px 0 darken($color-bg, 10%);
     &:hover {
-      box-shadow: inset 0 -47px 0 0 lighten($color-bg, 15%);
-      color: white;
+      box-shadow: inset 0 -50px 0 0 darken($color-bg, 25%);
+
       &::after {
-        color: inherit;
-        font-style: italic;
+        margin-right: 15px;
         margin-left: -5px;
+        color: lighten($color-bg, 10%);
+        font-style: italic;
+        font-weight: bold;
+        font-size: x-small;
         content: attr(title);
+        transition: all 0.2s ease-in-out;
       }
     }
   }
@@ -164,6 +189,7 @@ $colorsPal: (
 @each $colorname, $color-bg in $colorsPal {
   .bold-#{$colorname} {
     font-weight: bold;
+    font-family: $family-sans-serif;
     color: $color-bg;
     &:hover {
       color: lighten($color: $color-bg, $amount: 10%);
@@ -183,6 +209,9 @@ html {
   vertical-align: middle;
   height: 5vh;
 
+  filter: brightness(0.75) saturate(120%) contrast(110%) hue-rotate(20deg);
+  image-rendering: crisp-edges;
+  padding: 2em;
   width: 15vw;
   @media screen and (max-width: 1023px) {
     width: auto;
@@ -195,11 +224,15 @@ html {
 
 .is-avatar-hero {
   vertical-align: middle;
-  filter: contrast(120%);
-  max-width: 25vmax;
-  max-height: 25vmax;
+  img {
+    filter: brightness(1.05) saturate(110%) contrast(140%) hue-rotate(20deg);
+    image-rendering: crisp-edges;
+  }
+  max-width: 24vmax;
+  max-height: 24vmax;
+  transform: scale(1.2);
   background-image: linear-gradient(
-    rgba(29, 233, 182, 0.6),
+    rgba(28, 233, 181, 0.6),
     rgba(51, 51, 51, 0.7)
   );
   background-size: cover !important;
@@ -218,21 +251,17 @@ html {
   overflow-x: auto;
 }
 ::-webkit-scrollbar {
-  margin-top: 2px;
-  width: 5px !important;
-  height: 4px !important;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px transparentize($background, 0) !important;
+  background: #ddd;
 }
 
 ::-webkit-scrollbar-thumb {
-  -webkit-box-shadow: inset 0 0 6px transparentize($background, 0) !important;
+  background: #666;
 }
-::-webkit-scrollbar-thumb:horizontal {
-  -webkit-box-shadow: inset 0 0 6px transparentize($background, 0.9) !important;
-}
+
 button {
   a {
     color: #eff0eb;
@@ -246,12 +275,12 @@ button {
   justify-content: space-around;
 }
 .is-family-mono {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 .hr-match {
   display: inline-block;
   &:after {
-    content: "";
+    content: '';
     display: block;
     border-top: 5px solid $link-color;
     transform: skewX(-50deg);
@@ -264,7 +293,7 @@ button {
   color: $link-color;
 }
 .has-no-bg {
-  background: transparent;
+  background: transparent !important;
 }
 .progress {
   width: 55%;
@@ -350,5 +379,95 @@ button {
   }
   .progress {
     max-width: 35%;
+  }
+}
+.loader {
+  position: absolute;
+  top: calc(50% - 4em);
+  left: calc(50% - 4em);
+  width: 6em;
+  height: 6em;
+  border: 0.3em solid transparentize($color: #fff, $amount: 0.3);
+  border-left: 0.3em solid transparentize($color: $background, $amount: 0.7);
+  border-radius: 50%;
+  animation: load8 1.5s infinite linear;
+  transition: opacity 0.3s;
+}
+
+.loader--hide {
+  opacity: 0;
+  z-index: -9999999;
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+$link-color: #1de9b6; // Main Color
+$text-color: #263238; //Material Black
+$off-white: #e0e1e0;
+$button-highlight: #a6bacb;
+
+// animation: fadeInAnimation ease 3s;
+// animation-iteration-count: 1;
+// animation-fill-mode: forwards;
+// scroll-behavior: smooth;
+
+// @keyframes fadeInAnimation {
+//   0% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//   }
+// }
+
+.button-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  @media screen and (max-width: 600px) {
+    justify-content: space-evenly;
+  }
+}
+
+span.animate-hand {
+  animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
+  animation-duration: 2.2s; /* Change to speed up or slow down */
+  animation-iteration-count: infinite; /* Never stop waving :) */
+  transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
+  display: inline-block;
+  font-size: 1.8rem;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 1.5rem;
+  }
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-10deg);
+  } /* The following four values can be played with to make the waving more or less extreme */
+  20% {
+    transform: rotate(12deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(9deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  } /* Reset for the last half to pause */
+  100% {
+    transform: rotate(0deg);
   }
 }
